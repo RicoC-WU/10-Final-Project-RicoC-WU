@@ -80,7 +80,8 @@ class App extends Component {
   genQuotes(event){
     //let send = true;
     this.setState({
-      curr_search: [this.state.input,this.state.btnSelect]
+      curr_search: [this.state.input,this.state.btnSelect],
+      count: 0
     })
     if(this.state.btnSelect ==="" && event.target.id == "GoBtn"){
       let rem = document.getElementById("selErr");
@@ -141,12 +142,18 @@ class App extends Component {
             url = 'https://animechan.vercel.app/api/random/anime?title='+encodeURIComponent(this.state.input)+'&page='+this.state.count;
           }
         }
+        this.setState({
+          clicked: ""
+        })
       }else if(event.target.id == "RandomBtn"){
         if(this.state.genAmt == 10){
           url = "https://animechan.vercel.app/api/quotes";
         }else if(this.state.genAmt == 1){
           url = "https://animechan.vercel.app/api/random";
         }
+        this.setState({
+          clicked: "random"
+        })
       }
       console.log(url);
       var xhttp = new XMLHttpRequest();
@@ -191,9 +198,6 @@ class App extends Component {
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
     }
-    this.setState({
-      clicked: ""
-    })
   }
 
   genAll(event){
@@ -212,6 +216,14 @@ class App extends Component {
         self.setState({
           quotes: quotes
         })
+      }else if(this.status === 0 && this.readyState == 4 && !document.getElementById("noRes")){
+        let el = document.createElement("p");
+        el.id = "noRes";
+        self.setState({
+          quotes: []
+        })
+        el.innerText = "Sorry, no quotes could be generated at this time due to API limitations, please try again later."
+        document.getElementsByClassName("SearchTools")[0].appendChild(el);
       }
     }
     xhttp.open("GET",url,true);
@@ -235,7 +247,7 @@ class App extends Component {
          {this.state.quotes.map((info)=>(
           <QuoteBlock anime={info.anime} key={info.id} character={info.character} quote={info.quote}/>
          ))}
-        {(this.state.quotes.length < 10 && this.state.count == 0) ? <></> : this.state.count == 0 ? <><button onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count == 1 ? 
+        {((this.state.quotes.length < 10 && this.state.count == 0) || this.state.clicked == "random") ? <></> : this.state.count == 0 ? <><button onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count == 1 ? 
         <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 1 && this.state.quotes.length == 10) ? <> 
         <button id="uparr" onClick={this.handleArrowClick} ><i class="fa-solid fa-arrow-up"></i></button>
         <button id="downarr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-up"></i></button></>
