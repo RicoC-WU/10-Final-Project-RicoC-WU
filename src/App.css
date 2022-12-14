@@ -40,3 +40,73 @@
 img {
   margin: -110px 0px 0px 350px;
 }
+
+/*
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 60%;
+  padding: 30px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+}
+
+.SearchTools {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.SearchTools input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.SearchTools input[type="button"] {
+  width: 20%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.QuoteBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.QuoteBlock p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.QuoteBlock span {
+  font-style: italic;
+}
+
+.uparr, .downarr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.uparr, .downarr i {
+  cursor: pointer;
+}
+*/

@@ -6,7 +6,6 @@ class QuoteBlock extends Component{
             <div className="QuoteBlock">
                 <p>Anime: {this.props.anime} | Character: <em>{this.props.character}</em></p>
                 <p>"{this.props.quote}"</p> 
-                
             </div>
         )
     }
