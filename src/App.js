@@ -239,14 +239,15 @@ class App extends Component {
           <img id="NarutoSprite" alt="NaurtoSprite" src="Naruto.gif" height="62"></img><br/>
           <img id="IchigoSprite" alt="IchigoSprite" src="Ichigo.gif" height="95"></img><br/>
           <img id="GonSprite" alt="GonSprite" src="Gon.gif" height="120"></img><br/>
-          <h4>INSTRUCTIONS: Use the radio buttons to select whether you wish to find quotes by character or by anime title. Use the second set of radio buttons to select a number of quotes to generate. Then, use the Search Bar to search based on the chosen method.</h4>
+          <h4>INSTRUCTIONS: Use the radio buttons to select whether you wish to find quotes by character or by anime title. Use the second set of radio buttons to select a number of quotes to generate. Then, use the Search Bar to search based on the chosen method. 
+            When searching by character/title, a button will appear on the bottom of the page to see all of that search term's quotes. When this button is pressed, arrows will appear so that the user can scroll through the rest of that search term's quotes.</h4>
           <p>*Note: only 100 requests per hour is allowed for this generator due to API limitations. Please take this into consideration</p>
         </div>
          <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
          {this.state.quotes.map((info)=>(
           <QuoteBlock anime={info.anime} key={info.id} character={info.character} quote={info.quote}/>
          ))}
-        {((this.state.quotes.length < 10 && this.state.count === 0) || this.state.clicked === "random") ? <></> : this.state.count === 0 ? <><button onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 1 ? 
+        {((this.state.quotes.length < 10 && this.state.count === 0) || this.state.clicked === "random") ? <></> : this.state.count === 0 ? <><button id="seeAll" onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 1 ? 
         <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 1 && this.state.quotes.length === 10) ? <> 
         <button id="uparr" onClick={this.handleArrowClick} ><i class="fa-solid fa-arrow-up"></i></button>
         <button id="downarr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-up"></i></button></>

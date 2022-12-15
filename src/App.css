@@ -158,6 +158,15 @@ img {
   background-color: #2196F3;
 } */
 
+#seeAll{
+  color: white;
+  background-color: black;
+  border: none;
+  width: 70%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+
 .SearchTools button {
   color: white;
   background-color: black;
