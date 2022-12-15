@@ -6,11 +6,11 @@ body{
 
 
 .App{
- text-align: center;
- background-color: lightgray;
-display: flex;
-flex-direction: column;
-align-items: center;
+  text-align: center;
+  background-color: peachpuff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #LuffySprite{
@@ -89,12 +89,15 @@ img {
   box-shadow: 0 0 5px black;
   width: 80%;
   margin-bottom: 20px;
+  background-color: brown;
 }
 
 .QuoteBlock{
   box-shadow: 0 0 5px black;
+  background-color: brown;
   width: 80%;
   margin-bottom: 10px;
+  color: white;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -107,19 +110,36 @@ img {
 }
 
 .SearchTools input[type=radio]{
+  /* opacity: 0; */
+  cursor: pointer;
+  height: 20px;
+  width: 20px; 
+  background-color: grey;
+}
+
+/* .container {
+  display: flex;
+  position: relative;
+  flex-direction:column;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+} */
+
+/* .checkmark{
+  cursor: pointer;
+  position: relative;
+  left: 49%;
   height: 25px;
   width: 25px;
-  /* background-color: #eee; */
+  background-color: grey;
   border-radius: 50%;
 }
 
-.SearchTools input[type=radio]:hover{
-  cursor: pointer;
-}
-
-.SearchTools input[type=radio]:checked{
+.checkmark:checked{
   background-color: #2196F3;
-}
+} */
 
 .SearchTools button {
   color: white;
