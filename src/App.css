@@ -156,3 +156,21 @@ img {
   cursor:pointer;
 }
 
+#uparr,#downarr{
+  background-color: black;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+}
+#uparr{
+  margin-bottom: 5px;
+ 
+}
+#downarr{
+  margin-bottom: 20px;
+}
+
