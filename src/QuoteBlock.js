@@ -4,8 +4,9 @@ class QuoteBlock extends Component{
     render(){
         return(
             <div className="QuoteBlock">
-                <p>Anime: {this.props.anime} | Character: <em>{this.props.character}</em></p>
-                <p>"{this.props.quote}"</p> 
+                <p>"{this.props.quote}"</p>
+                ~<em>{this.props.character}</em>
+                <p>Anime: {this.props.anime}</p>
             </div>
         )
     }

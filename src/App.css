@@ -1,39 +1,83 @@
-.App {
-  text-align: center;
+body{
+  background-color: gray;
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.App{
+ text-align: center;
+ background-color: lightgray;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#LuffySprite{
+  position:relative;
+  left: 40px;
+  bottom: 25px;
+}
+#GokuSprite{
+  position:relative;
+  right: 150px;
+  top: 45px;
+}
+
+#NarutoSprite{
+  position: relative;
+  right: 25px;
+}
+
+#IchigoSprite{
+  position: relative;
+  right: 300px;
+  bottom:10px;
+}
+
+#GonSprite{
+  position: relative;
+  right: 380px;
+  bottom:80px;
+}
+
+@media(max-width: 480px){
+  .header{
+    font-size: 13px;
+
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  #LuffySprite{
+    position: relative;
+    height: 60px;
+    left: -80px;
+    bottom: 20px;
   }
-  to {
-    transform: rotate(360deg);
+  #GokuSprite{
+    position:relative;
+    right: 185px;
+    top: 45px;
+    height: 110px;
+  }
+  
+  #NarutoSprite{
+    position: relative;
+    right: 80px; 
+    height: 55px;
+  }
+  
+  #IchigoSprite{
+    position: relative;
+    right: 300px;
+    bottom:10px;
+    height: 80px;
+  }
+  
+  #GonSprite{
+    position: relative;
+    /* top: 0px; */
+    right: 360px;
+    bottom:60px;
+    height: 100px;
   }
 }
 
@@ -41,72 +85,54 @@ img {
   margin: -110px 0px 0px 350px;
 }
 
-/*
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  width: 60%;
-  padding: 30px;
-  background-color: #f4f4f4;
-  border-radius: 5px;
+.SearchTools{
+  box-shadow: 0 0 5px black;
+  width: 80%;
+  margin-bottom: 20px;
 }
 
-.SearchTools {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 30px;
+.QuoteBlock{
+  box-shadow: 0 0 5px black;
+  width: 80%;
+  margin-bottom: 10px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.SearchTools input[type="text"] {
+.SearchTools input[type=text]{
   width: 70%;
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
   border-radius: 5px;
-  font-size: 16px;
 }
 
-.SearchTools input[type="button"] {
-  width: 20%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #fff;
+.SearchTools input[type=radio]{
+  height: 25px;
+  width: 25px;
+  /* background-color: #eee; */
+  border-radius: 50%;
+}
+
+.SearchTools input[type=radio]:hover{
   cursor: pointer;
 }
 
-.QuoteBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.SearchTools input[type=radio]:checked{
+  background-color: #2196F3;
 }
 
-.QuoteBlock p {
-  font-size: 18px;
-  margin: 10px 0;
+.SearchTools button {
+  color: white;
+  background-color: black;
+  border: none;
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius:5px;
+}
+.SearchTools button:hover{
+  background-color: gray;
+  cursor:pointer;
 }
 
-.QuoteBlock span {
-  font-style: italic;
-}
-
-.uparr, .downarr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 30px;
-}
-
-.uparr, .downarr i {
-  cursor: pointer;
-}
-*/

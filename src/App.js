@@ -2,7 +2,6 @@ import {Component} from "react";
 import SearchTools from "./SearchTools";
 import QuoteBlock from "./QuoteBlock";
 import './App.css';
-import { isElementOfType } from "react-dom/test-utils";
 
 
 class App extends Component {
@@ -26,28 +25,22 @@ class App extends Component {
     this.handleCountChange = this.handleCountChange.bind(this);
   }
 
-  // componentDidMount(){
-
-  // }
-
   handleButtonChange(event){
     this.setState({
       btnSelect: event.target.value
     })
-   // console.log(this.state.btnSelect);
   }
 
   handleAmountChange(event){
     this.setState({
       genAmt: parseInt(event.target.value)
-    },()=>{console.log(this.state.genAmt)})
+    })
   }
 
   handleSearchInput(event){
     this.setState({
       input: event.target.value
     })
-  //  console.log(this.state.input)
   }
 
   handleArrowClick(event){
@@ -55,9 +48,9 @@ class App extends Component {
     let id = event.currentTarget.id;
     console.log("THIS ARROW IS:" + id);
     var add;
-    if(id == "downarr"){
+    if(id === "downarr"){
       add = 1;
-    }else if(id == "uparr"){
+    }else if(id === "uparr"){
       add = -1;
     }else{
       add = 0;
@@ -83,7 +76,7 @@ class App extends Component {
       curr_search: [this.state.input,this.state.btnSelect],
       count: 0
     })
-    if(this.state.btnSelect ==="" && event.target.id == "GoBtn"){
+    if(this.state.btnSelect ==="" && event.target.id === "GoBtn"){
       let rem = document.getElementById("selErr");
       if(rem){
         rem.remove();
@@ -99,7 +92,7 @@ class App extends Component {
         el.innerText = "Please select a search method";
         document.getElementsByClassName("SearchTools")[0].appendChild(el);
       }
-    }else if(this.state.input === "" && event.target.id == "GoBtn"){
+    }else if(this.state.input === "" && event.target.id === "GoBtn"){
       let rem = document.getElementById("selErr");
       if(rem){
         rem.remove();
@@ -108,7 +101,7 @@ class App extends Component {
       el.id = "selErr";
       el.innerText = "Nah you needa type in a character name bruv";
       document.getElementsByClassName("SearchTools")[0].appendChild(el);
-    }else if(this.state.genAmt != 1 && this.state.genAmt != 10){
+    }else if(this.state.genAmt !== 1 && this.state.genAmt !== 10){
       let rem = document.getElementById("selErr");
       if(rem){
         rem.remove();
@@ -128,27 +121,27 @@ class App extends Component {
       }
       const self = this;
       var url = "";
-      if(event.target.id == "GoBtn"){
+      if(event.target.id === "GoBtn"){
         if(this.state.btnSelect === "Character"){
-          if(this.state.genAmt == 10){
+          if(this.state.genAmt === 10){
             url ='https://animechan.vercel.app/api/quotes/character?name='+encodeURIComponent(this.state.input)+'&page='+this.state.count;   
-          }else if(this.state.genAmt == 1){
+          }else if(this.state.genAmt === 1){
             url ='https://animechan.vercel.app/api/random/character?name='+encodeURIComponent(this.state.input)+'&page='+this.state.count;   
           }
         }else if(this.state.btnSelect === "Title"){
-          if(this.state.genAmt == 10){
+          if(this.state.genAmt === 10){
             url = 'https://animechan.vercel.app/api/quotes/anime?title='+encodeURIComponent(this.state.input)+'&page='+this.state.count;
-          }else if(this.state.genAmt == 1){
+          }else if(this.state.genAmt === 1){
             url = 'https://animechan.vercel.app/api/random/anime?title='+encodeURIComponent(this.state.input)+'&page='+this.state.count;
           }
         }
         this.setState({
           clicked: ""
         })
-      }else if(event.target.id == "RandomBtn"){
-        if(this.state.genAmt == 10){
+      }else if(event.target.id === "RandomBtn"){
+        if(this.state.genAmt === 10){
           url = "https://animechan.vercel.app/api/quotes";
-        }else if(this.state.genAmt == 1){
+        }else if(this.state.genAmt === 1){
           url = "https://animechan.vercel.app/api/random";
         }
         this.setState({
@@ -162,11 +155,11 @@ class App extends Component {
           console.log(this.response);
           var quotes = JSON.parse(this.response);
           //console.log(quotes);
-          if(self.state.genAmt == 10){ 
+          if(self.state.genAmt === 10){ 
             self.setState({
               quotes: quotes
             })
-          }else if(self.state.genAmt == 1){
+          }else if(self.state.genAmt === 1){
             self.setState({
               quotes: [quotes]
             })
@@ -177,14 +170,14 @@ class App extends Component {
           self.setState({
             quotes: []
           })
-          if(event.target.id == "GoBtn"){
+          if(event.target.id === "GoBtn"){
             el.innerText = `Sorry, no results have been found for the ${self.state.btnSelect} "${self.state.input}"`
             document.getElementsByClassName("SearchTools")[0].appendChild(el);
-          }else if(event.target.id == "RandomBtn"){
+          }else if(event.target.id === "RandomBtn"){
             el.innerText = "Sorry, we could not generate 10 quotes, try again later."
             document.getElementsByClassName("SearchTools")[0].appendChild(el);
           }
-        }else if(this.status === 0 && this.readyState == 4 && !document.getElementById("noRes")){
+        }else if(this.status === 0 && this.readyState === 4 && !document.getElementById("noRes")){
           let el = document.createElement("p");
           el.id = "noRes";
           self.setState({
@@ -216,7 +209,7 @@ class App extends Component {
         self.setState({
           quotes: quotes
         })
-      }else if(this.status === 0 && this.readyState == 4 && !document.getElementById("noRes")){
+      }else if(this.status === 0 && this.readyState === 4 && !document.getElementById("noRes")){
         let el = document.createElement("p");
         el.id = "noRes";
         self.setState({
@@ -239,16 +232,22 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-         <h2>ANIME QUOTE GENERATOR</h2>
-         <img alt="LuffySprite" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/eaea9a95-2614-4b2a-ab10-580f594097f7/d5fwb6m-9f9381c7-f6d3-4168-8b75-29ffbf8313d1.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VhZWE5YTk1LTI2MTQtNGIyYS1hYjEwLTU4MGY1OTQwOTdmN1wvZDVmd2I2bS05ZjkzODFjNy1mNmQzLTQxNjgtOGI3NS0yOWZmYmY4MzEzZDEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.IRNZn-StYyX8gSMmd8dteLZ2KyKHVyFIdXO7A-J0Bf0"></img><br/>
-         <h4>INSTRUCTIONS: Use the radio buttons to select whether you wish to find quotes by character or by anime title. Use the second set of radio buttons to select a number of quotes to generate. Then, use the Search Bar to search based on the chosen method.</h4>
-         <p>*Note: only 100 requests per hour is allowed for this generator due to API limitations. Please take this into consideration</p>
+        <div class="header">
+        <h2>ANIME QUOTE GENERATOR</h2>
+          <img id="LuffySprite" alt="LuffySprite" src="Luffy.gif"></img><br/>
+          <img id="GokuSprite" alt="GokuSprite" src="Goku.gif"></img><br/>
+          <img id="NarutoSprite" alt="NaurtoSprite" src="Naruto.gif" height="62"></img><br/>
+          <img id="IchigoSprite" alt="IchigoSprite" src="Ichigo.gif" height="95"></img><br/>
+          <img id="GonSprite" alt="GonSprite" src="Gon.gif" height="120"></img><br/>
+          <h4>INSTRUCTIONS: Use the radio buttons to select whether you wish to find quotes by character or by anime title. Use the second set of radio buttons to select a number of quotes to generate. Then, use the Search Bar to search based on the chosen method.</h4>
+          <p>*Note: only 100 requests per hour is allowed for this generator due to API limitations. Please take this into consideration</p>
+        </div>
          <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
          {this.state.quotes.map((info)=>(
           <QuoteBlock anime={info.anime} key={info.id} character={info.character} quote={info.quote}/>
          ))}
-        {((this.state.quotes.length < 10 && this.state.count == 0) || this.state.clicked == "random") ? <></> : this.state.count == 0 ? <><button onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count == 1 ? 
-        <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 1 && this.state.quotes.length == 10) ? <> 
+        {((this.state.quotes.length < 10 && this.state.count === 0) || this.state.clicked === "random") ? <></> : this.state.count === 0 ? <><button onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 1 ? 
+        <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 1 && this.state.quotes.length === 10) ? <> 
         <button id="uparr" onClick={this.handleArrowClick} ><i class="fa-solid fa-arrow-up"></i></button>
         <button id="downarr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-up"></i></button></>
         }
