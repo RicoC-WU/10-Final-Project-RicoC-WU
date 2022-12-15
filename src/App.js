@@ -14,7 +14,7 @@ class App extends Component {
       genAmt: 0,
       curr_search: [],
       clicked: "",
-      count: 0
+      count: -1
     };
     this.genQuotes = this.genQuotes.bind(this);
     this.handleButtonChange = this.handleButtonChange.bind(this);
@@ -49,9 +49,9 @@ class App extends Component {
     console.log("THIS ARROW IS:" + id);
     var add;
     if(id === "downarr"){
-      add = 1;
+      add = 10;
     }else if(id === "uparr"){
-      add = -1;
+      add = -10;
     }else{
       add = 0;
     }
@@ -66,15 +66,14 @@ class App extends Component {
 
   handleCountChange(event){
     this.setState({
-      count: 1
+      count: 0
     })
   }
 
   genQuotes(event){
-    //let send = true;
     this.setState({
       curr_search: [this.state.input,this.state.btnSelect],
-      count: 0
+      count: -1
     })
     if(this.state.btnSelect ==="" && event.target.id === "GoBtn"){
       let rem = document.getElementById("selErr");
@@ -124,15 +123,15 @@ class App extends Component {
       if(event.target.id === "GoBtn"){
         if(this.state.btnSelect === "Character"){
           if(this.state.genAmt === 10){
-            url ='https://animechan.vercel.app/api/quotes/character?name='+encodeURIComponent(this.state.input)+'&page='+this.state.count;   
+            url ='https://animechan.vercel.app/api/quotes/character?name='+encodeURIComponent(this.state.input); 
           }else if(this.state.genAmt === 1){
-            url ='https://animechan.vercel.app/api/random/character?name='+encodeURIComponent(this.state.input)+'&page='+this.state.count;   
+            url ='https://animechan.vercel.app/api/random/character?name='+encodeURIComponent(this.state.input);
           }
         }else if(this.state.btnSelect === "Title"){
           if(this.state.genAmt === 10){
-            url = 'https://animechan.vercel.app/api/quotes/anime?title='+encodeURIComponent(this.state.input)+'&page='+this.state.count;
+            url = 'https://animechan.vercel.app/api/quotes/anime?title='+encodeURIComponent(this.state.input);
           }else if(this.state.genAmt === 1){
-            url = 'https://animechan.vercel.app/api/random/anime?title='+encodeURIComponent(this.state.input)+'&page='+this.state.count;
+            url = 'https://animechan.vercel.app/api/random/anime?title='+encodeURIComponent(this.state.input);
           }
         }
         this.setState({
@@ -154,7 +153,6 @@ class App extends Component {
         if(this.readyState === 4 && this.status === 200){
           console.log(this.response);
           var quotes = JSON.parse(this.response);
-          //console.log(quotes);
           if(self.state.genAmt === 10){ 
             self.setState({
               quotes: quotes
@@ -194,13 +192,20 @@ class App extends Component {
   }
 
   genAll(event){
+    let el = document.getElementById("selErr");
+    let el2 = document.getElementById("noRes");
+    if(el){
+      el.remove();
+    }
+    if(el2){
+      el2.remove();
+    }
     const self = this;
-    //console.log(self.state.count);
     var url;
     if(this.state.curr_search[1] === "Character"){
-      url = `https://animechan.vercel.app/api/quotes/character?name=${this.state.curr_search[0]}&page=${this.state.count}`;
+      url = `https://animechan.vercel.app/api/quotes/character?name=${this.state.curr_search[0]}&page=${self.state.count}`;
     }else if(this.state.curr_search[1] === "Title"){
-      url = `https://animechan.vercel.app/api/quotes/anime?title=${this.state.curr_search[0]}&page=${this.state.count}`;
+      url = `https://animechan.vercel.app/api/quotes/anime?title=${this.state.curr_search[0]}&page=${self.state.count}`;
     }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
@@ -209,6 +214,14 @@ class App extends Component {
         self.setState({
           quotes: quotes
         })
+      }else if((this.status === 404 || this.status === 500) && !document.getElementById("noRes")){
+          let el = document.createElement("p");
+          el.id = "noRes";
+          self.setState({
+            count: self.state.count - 10
+          })
+          el.innerText = `There are no more quotes to yield for this search term .`
+          document.getElementsByClassName("SearchTools")[0].appendChild(el);
       }else if(this.status === 0 && this.readyState === 4 && !document.getElementById("noRes")){
         let el = document.createElement("p");
         el.id = "noRes";
@@ -247,8 +260,8 @@ class App extends Component {
          {this.state.quotes.map((info)=>(
           <QuoteBlock anime={info.anime} key={info.id} character={info.character} quote={info.quote}/>
          ))}
-        {((this.state.quotes.length < 10 && this.state.count === 0) || this.state.clicked === "random") ? <></> : this.state.count === 0 ? <><button id="seeAll" onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 1 ? 
-        <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 1 && this.state.quotes.length === 10) ? <> 
+        {((this.state.quotes.length < 10 && this.state.count === -1) || this.state.clicked === "random") ? <></> : this.state.count === -1 ? <><button id="seeAll" onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 0 ? 
+        <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 0 && this.state.quotes.length === 10) ? <> 
         <button id="uparr" onClick={this.handleArrowClick} ><i class="fa-solid fa-arrow-up"></i></button>
         <button id="downarr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-up"></i></button></>
         }

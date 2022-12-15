@@ -101,7 +101,8 @@ img {
 .SearchTools{
   box-shadow: 0 0 5px black;
   width: 80%;
-  margin-bottom: 20px;
+  padding-bottom: 30px;
+  margin-bottom: 150px;
   background-color: brown;
 }
 
