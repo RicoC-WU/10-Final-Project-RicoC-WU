@@ -1,6 +1,7 @@
 import {Component} from "react";
 import SearchTools from "./SearchTools";
 import QuoteBlock from "./QuoteBlock";
+import QuoteList from "./QuoteList";
 import './App.css';
 
 
@@ -208,7 +209,9 @@ class App extends Component {
       url = `https://animechan.vercel.app/api/quotes/anime?title=${this.state.curr_search[0]}&page=${self.state.count}`;
     }
     var xhttp = new XMLHttpRequest();
+    
     xhttp.onreadystatechange = function(){
+      console.log(this.status);
       if(this.readyState === 4 && this.status === 200){
         var quotes = JSON.parse(this.response);
         self.setState({
@@ -221,7 +224,7 @@ class App extends Component {
             count: self.state.count - 10
           })
           el.innerText = `There are no more quotes to yield for this search term .`
-          document.getElementsByClassName("SearchTools")[0].appendChild(el);
+          document.getElementsByClassName("App")[0].appendChild(el);
       }else if(this.status === 0 && this.readyState === 4 && !document.getElementById("noRes")){
         let el = document.createElement("p");
         el.id = "noRes";
@@ -245,25 +248,23 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <div class="header">
+        <div className="header">
         <h2>ANIME QUOTE GENERATOR</h2>
-          <img id="LuffySprite" alt="LuffySprite" src="Luffy.gif"></img><br/>
-          <img id="GokuSprite" alt="GokuSprite" src="Goku.gif"></img><br/>
-          <img id="NarutoSprite" alt="NaurtoSprite" src="Naruto.gif" height="62"></img><br/>
-          <img id="IchigoSprite" alt="IchigoSprite" src="Ichigo.gif" height="95"></img><br/>
-          <img id="GonSprite" alt="GonSprite" src="Gon.gif" height="120"></img><br/>
+          <img id="LuffySprite" alt="LuffySprite" src="Luffy.gif"/><br/>
+          <img id="GokuSprite" alt="GokuSprite" src="Goku.gif"/><br/>
+          <img id="NarutoSprite" alt="NaurtoSprite" src="Naruto.gif"/><br/>
+          <img id="IchigoSprite" alt="IchigoSprite" src="Ichigo.gif"/><br/>
+          <img id="GonSprite" alt="GonSprite" src="Gon.gif"/><br/>
           <h4>INSTRUCTIONS: Use the radio buttons to select whether you wish to find quotes by character or by anime title. Use the second set of radio buttons to select a number of quotes to generate. Then, use the Search Bar to search based on the chosen method. 
             When searching by character/title, a button will appear on the bottom of the page to see all of that search term's quotes. When this button is pressed, arrows will appear so that the user can scroll through the rest of that search term's quotes.</h4>
           <p>*Note: only 100 requests per hour is allowed for this generator due to API limitations. Please take this into consideration</p>
         </div>
-         <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
-         {this.state.quotes.map((info)=>(
-          <QuoteBlock anime={info.anime} key={info.id} character={info.character} quote={info.quote}/>
-         ))}
+        <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
+        <QuoteList quotes={this.state.quotes}/>
         {((this.state.quotes.length < 10 && this.state.count === -1) || this.state.clicked === "random") ? <></> : this.state.count === -1 ? <><button id="seeAll" onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 0 ? 
-        <><button id="downarr" onClick={this.handleArrowClick}><i class="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 0 && this.state.quotes.length === 10) ? <> 
-        <button id="uparr" onClick={this.handleArrowClick} ><i class="fa-solid fa-arrow-up"></i></button>
-        <button id="downarr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i class="fa-solid fa-arrow-up"></i></button></>
+        <><button id="downarr" onClick={this.handleArrowClick}><i className="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 0 && this.state.quotes.length === 10) ? <> 
+        <button id="uparr" onClick={this.handleArrowClick} ><i className="fa-solid fa-arrow-up"></i></button>
+        <button id="downarr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-up"></i></button></>
         }
       </div>
     );

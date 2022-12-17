@@ -197,4 +197,9 @@ img {
   margin-bottom: 20px;
 }
 
+.QuoteList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
