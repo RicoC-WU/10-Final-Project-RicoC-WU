@@ -251,7 +251,7 @@ class App extends Component {
           <img id="IchigoSprite" alt="IchigoSprite" src="Ichigo.gif" height="95"></img><br/>
           <img id="GonSprite" alt="GonSprite" src="Gon.gif" height="120"></img><br/>
           <h4>INSTRUCTIONS: Use the radio buttons to select whether you wish to find quotes by character or by anime title. Use the second set of radio buttons to select a number of quotes to generate. Then, use the Search Bar to search based on the chosen method. 
-            When searching by character/title, a button will appear on the bottom of the page to see all of that search term's quotes. When this button is pressed, arrows will appear so that the user can scroll through the rest of that search term's quotes.</h4>
+            When searching by character/title and using 10 for the "Quote Amount" buttons, a button will appear on the bottom of the page to see all of that search term's quotes if there are more than 10 quotes for that search term. When this button is pressed, arrows will appear so that the user can scroll through the rest of that search term's quotes.</h4>
           <p>*Note: only 100 requests per hour is allowed for this generator due to API limitations. Please take this into consideration</p>
         </div>
         <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
