@@ -257,7 +257,7 @@ class App extends Component {
         <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
         <QuoteList quotes={this.state.quotes}/>
         {((this.state.quotes.length < 10 && this.state.count === -1) || this.state.clicked === "random") ? <></> : this.state.count === -1 ? <><button id="seeAll" onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 0 ? 
-        <><button id="downarr" onClick={this.handleArrowClick}><i className="fa-solid fa-arrow-down"></i></button></> : (this.state.count > -1 && this.state.quotes.length === 10) ? <> 
+        <><button id="downarr" onClick={this.handleArrowClick}><i className="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 0 && this.state.quotes.length === 10) ? <> 
         <button id="uparr" onClick={this.handleArrowClick} ><i className="fa-solid fa-arrow-up"></i></button><button id="downarr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-down"></i></button></> 
         : <><button id="uparr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-up"></i></button></>
         }
