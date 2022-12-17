@@ -47,7 +47,6 @@ class App extends Component {
   handleArrowClick(event){
     const self = this;
     let id = event.currentTarget.id;
-    console.log("THIS ARROW IS:" + id);
     var add;
     if(id === "downarr"){
       add = 10;
@@ -148,11 +147,9 @@ class App extends Component {
           clicked: "random"
         })
       }
-      console.log(url);
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function(){
         if(this.readyState === 4 && this.status === 200){
-          console.log(this.response);
           var quotes = JSON.parse(this.response);
           if(self.state.genAmt === 10){ 
             self.setState({
@@ -211,7 +208,6 @@ class App extends Component {
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function(){
-      console.log(this.status);
       if(this.readyState === 4 && this.status === 200){
         var quotes = JSON.parse(this.response);
         self.setState({
@@ -238,7 +234,6 @@ class App extends Component {
     xhttp.open("GET",url,true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
-    console.log(url);
     self.setState({
       clicked: ""
     })
@@ -262,9 +257,9 @@ class App extends Component {
         <SearchTools handleButtonChange={this.handleButtonChange} handleAmountChange={this.handleAmountChange} handleSearchInput={this.handleSearchInput} genQuotes={this.genQuotes} showQuotes={this.showQuotes}genAmt={this.state.genAmt}/>
         <QuoteList quotes={this.state.quotes}/>
         {((this.state.quotes.length < 10 && this.state.count === -1) || this.state.clicked === "random") ? <></> : this.state.count === -1 ? <><button id="seeAll" onClick={this.handleCountChange}>See all quotes by "{this.state.curr_search[0]}"</button></> : this.state.count === 0 ? 
-        <><button id="downarr" onClick={this.handleArrowClick}><i className="fa-solid fa-arrow-down"></i></button></> : (this.state.count > 0 && this.state.quotes.length === 10) ? <> 
-        <button id="uparr" onClick={this.handleArrowClick} ><i className="fa-solid fa-arrow-up"></i></button>
-        <button id="downarr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-down"></i></button></> : <><button id="uparr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-up"></i></button></>
+        <><button id="downarr" onClick={this.handleArrowClick}><i className="fa-solid fa-arrow-down"></i></button></> : (this.state.count > -1 && this.state.quotes.length === 10) ? <> 
+        <button id="uparr" onClick={this.handleArrowClick} ><i className="fa-solid fa-arrow-up"></i></button><button id="downarr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-down"></i></button></> 
+        : <><button id="uparr" onClick={this.handleArrowClick }><i className="fa-solid fa-arrow-up"></i></button></>
         }
       </div>
     );
